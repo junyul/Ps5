@@ -1,10 +1,9 @@
 package pkgLibrary;
 
+import java.util.ArrayList;
 import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 public class Book {
 
@@ -19,7 +18,28 @@ public class Book {
 	public Book() {
 
 	}
-
+	public static Book GetBook(String id) throws BookException  {
+		Catalog c = ReadXMLFile();
+		ArrayList<Book> BookList = c.getBooks();
+		Book Number = null; 
+		
+		for (Book i : BookList )
+			if (i.getId().equals(id)) {
+				Number = i;
+			}
+				
+		if (Number == null) {
+			throw new BookException("Book cannot be found");
+		}
+		else
+			return Number;
+	}
+	private static Catalog ReadXMLFile() {
+		
+		return null;
+	}
+	
+	
 	public Book(String id, String author, String title, String genre, double price, Date publish_date, String description)
 	{
 		super();
@@ -32,7 +52,13 @@ public class Book {
 		this.description = description;
 	}
 	
- 
+	
+	
+	public static void AddBook(int CatalogID, Book BookInstance)；
+		if (Number == null) {
+						BookList.add(BookInstance);
+						c.setBooks(BookList);
+						WriteXMLFile(c);
 
 	public String getId() {
 		return id;
